@@ -10,9 +10,9 @@ docker build -t c2cnetworking/geode-server -f server.Dockerfile .
 assuming you have [container networking](https://github.com/cloudfoundry-incubator/netman-release) set up...
 
 ```
-cf push geode-locator -o c2cnetworking/geode-locator
+cf push geode-locator -o c2cnetworking/geode-locator -m 512M
 
-cf push geode-server -o c2cnetworking/geode-server --no-start --no-route --health-check-type none
+cf push geode-server -o c2cnetworking/geode-server -m 512M --no-start --no-route --health-check-type none
 
 cf set-env geode-server LOCATOR_IP $(cf ssh geode-locator -c "/sbin/ip addr | grep 10.255 | cut -d ' ' -f 6 | cut -d '/' -f1")
 
